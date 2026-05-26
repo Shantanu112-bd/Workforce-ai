@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.625rem;
+  --font-dm-sans: 'DM Sans', system-ui, sans-serif;
+  --font-syne: 'Syne', system-ui, sans-serif;
+}
+
+/* Dark-first design */
+* { box-sizing: border-box; }
+
+body {
+  background: #0A0A0F;
+  color: #F0F0F8;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #111118; }
+::-webkit-scrollbar-thumb { background: #2A2A38; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #353548; }
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #6C63FF;
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection { background: rgba(108, 99, 255, 0.3); }
+
+@layer components {
+  .card {
+    @apply bg-bg-2 border border-border rounded-xl;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-accent/50 hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-accent hover:bg-accent/90 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-all duration-150 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-border hover:border-border-2 text-text-2 hover:text-text font-medium text-sm px-4 py-2.5 rounded-lg transition-all duration-150;
+  }
+
+  .btn-danger {
+    @apply bg-brand-red/10 border border-brand-red/30 hover:bg-brand-red/20 text-brand-red font-medium text-sm px-4 py-2.5 rounded-lg transition-all duration-150;
+  }
+
+  .input {
+    @apply bg-bg-3 border border-border rounded-lg px-3 py-2.5 text-sm text-text placeholder:text-text-3 focus:border-accent focus:outline-none transition-colors w-full;
+  }
+
+  .badge {
+    @apply text-xs font-semibold px-2.5 py-1 rounded-full;
+  }
+
+  .badge-active { @apply bg-accent-2/10 text-accent-2; }
+  .badge-disabled { @apply bg-brand-red/10 text-brand-red; }
+  .badge-free { @apply bg-accent/10 text-accent; }
+  .badge-pro { @apply bg-brand-amber/10 text-brand-amber; }
+  .badge-pending { @apply bg-brand-amber/10 text-brand-amber; }
+  .badge-approved { @apply bg-accent-2/10 text-accent-2; }
+  .badge-rejected { @apply bg-brand-red/10 text-brand-red; }
+}
+
+/* Gradient mesh background for auth pages */
+.auth-bg {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(108, 99, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(79, 255, 176, 0.06) 0%, transparent 50%),
+    #0A0A0F;
+}
+
+/* Agent card shimmer on hover */
+.agent-card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.agent-card-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(108,99,255,0.04));
+  pointer-events: none;
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply bg-bg-3 animate-pulse rounded;
+}
+
+/* Typing cursor */
+.typing::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Cache invalidation: CSS reload trigger */
